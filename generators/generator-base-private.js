@@ -1304,7 +1304,7 @@ module.exports = class extends Generator {
      * @param {string} buildTool - buildTool
      */
     getResourceBuildDirectoryForBuildTool(buildTool) {
-        return buildTool === 'maven' ? 'target/classes/' : 'build/resources/main/';
+        return buildTool === 'maven' ? 'build/resources/main/' : 'target/classes/';
     }
 
     /**

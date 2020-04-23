@@ -64,6 +64,15 @@ export * from './entityFolderName/entityFileName.state';`;
         });
     });
 
+    describe('getResourceBuildDirectoryForBuildTool', () => {
+        it('should return target/classes/ for maven', () => {
+            expect(BaseGenerator.getResourceBuildDirectoryForBuildTool('maven')).to.equal('target/classes/');
+        });
+        it('should return build/resources/main/ for gradle', () => {
+            expect(BaseGenerator.getResourceBuildDirectoryForBuildTool('gradle')).to.equal('build/resources/main/');
+        });
+    });
+
     describe('generateEntityClientImports', () => {
         describe('with relationships from or to the User', () => {
             const relationships = [
