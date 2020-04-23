@@ -464,7 +464,7 @@ function buildEnumInfo(field, angularAppName, packageName, clientRootFolder) {
     const enums = field.fieldValues.replace(/\s/g, '').split(',');
     const enumsWithCustomValue = getEnumsWithCustomValue(enums);
     return {
-        enumName: fieldType,
+        enumNmae: fieldType,
         enumValues: field.fieldValues.split(',').join(', '),
         enumInstance: field.enumInstance,
         enums,
