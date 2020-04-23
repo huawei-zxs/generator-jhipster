@@ -172,3 +172,29 @@ describe('jhipster cli utils test', () => {
         });
     });
 });
+
+describe('loadBlueprints', () => {
+    describe('when called with --blueprint argument', () => {
+        it('normalizes the blueprint name', () => {
+            const originalArgv = process.argv;
+            process.argv = ['node', 'jhipster', '--blueprint', 'bar'];
+            try {
+                expect(cliUtil.loadBlueprints()).to.deep.equal(['generator-jhipster-bar']);
+            } finally {
+                process.argv = originalArgv;
+            }
+        });
+    });
+
+    describe('when called with --blueprints argument', () => {
+        it('normalizes multiple blueprint names', () => {
+            const originalArgv = process.argv;
+            process.argv = ['node', 'jhipster', '--blueprints', 'bar,baz'];
+            try {
+                expect(cliUtil.loadBlueprints()).to.deep.equal(['generator-jhipster-bar', 'generator-jhipster-baz']);
+            } finally {
+                process.argv = originalArgv;
+            }
+        });
+    });
+});
