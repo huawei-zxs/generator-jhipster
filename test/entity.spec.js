@@ -730,6 +730,28 @@ describe('JHipster generator for entity', () => {
             });
         });
 
+        describe('with fields needing humanized labels', () => {
+            before(done => {
+                helpers
+                    .run(require.resolve('../generators/entity'))
+                    .inTmpDir(dir => {
+                        fse.copySync(path.join(__dirname, '../test/templates/default-ng2'), dir);
+                        fse.copySync(
+                            path.join(__dirname, '../test/templates/export-jdl/.jhipster/Country.json'),
+                            path.join(dir, '.jhipster/Foo.json')
+                        );
+                    })
+                    .withArguments(['Foo'])
+                    .withOptions({ regenerate: true, force: true })
+                    .on('end', done);
+            });
+
+            it('generates humanized field labels in the entity i18n files', () => {
+                assert.fileContent(`${CLIENT_MAIN_SRC_DIR}i18n/en/foo.json`, '"countryName": "Country Name"');
+                assert.fileContent(`${CLIENT_MAIN_SRC_DIR}app/entities/foo/foo-detail.component.html`, 'Country Name');
+            });
+        });
+
         describe('with --skip-db-changelog', () => {
             describe('SQL database', () => {
                 before(done => {
