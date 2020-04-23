@@ -1,5 +1,7 @@
+const fs = require('fs');
 const path = require('path');
 const assert = require('yeoman-assert');
+const semver = require('semver');
 const helpers = require('yeoman-test');
 const getFilesForOptions = require('./utils/utils').getFilesForOptions;
 const expectedFiles = require('./utils/expected-files');
@@ -77,6 +79,14 @@ describe('JHipster client generator', () => {
         });
         it('contains clientPackageManager with npm value', () => {
             assert.fileContent('.yo-rc.json', /"clientPackageManager": "npm"/);
+        });
+        it('generates a TypeScript version compatible with the Angular compiler', () => {
+            const packageJson = JSON.parse(fs.readFileSync('package.json', 'utf8'));
+            const typescriptVersion = packageJson.devDependencies.typescript;
+            assert(
+                semver.satisfies(typescriptVersion, '>=3.6.0 <3.8.0'),
+                `TypeScript ${typescriptVersion} is not supported by @angular/compiler-cli 9.0.4 (supported range: >=3.6.0 <3.8.0)`
+            );
         });
     });
 
