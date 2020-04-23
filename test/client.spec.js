@@ -7,6 +7,7 @@ const angularFiles = require('../generators/client/files-angular').files;
 const reactFiles = require('../generators/client/files-react').files;
 const constants = require('../generators/generator-constants');
 
+const CLIENT_MAIN_SRC_DIR = constants.CLIENT_MAIN_SRC_DIR;
 const ANGULAR = constants.SUPPORTED_CLIENT_FRAMEWORKS.ANGULAR;
 const REACT = constants.SUPPORTED_CLIENT_FRAMEWORKS.REACT;
 
@@ -36,6 +37,9 @@ describe('JHipster client generator', () => {
                     testFrameworks: []
                 })
             );
+        });
+        it('creates the webpack entry file index.html', () => {
+            assert.file(`${CLIENT_MAIN_SRC_DIR}index.html`);
         });
         it('contains clientFramework with react value', () => {
             assert.fileContent('.yo-rc.json', /"clientFramework": "react"/);

@@ -107,7 +107,6 @@ const files = {
                 { file: 'favicon.ico', method: 'copy' },
                 'robots.txt',
                 '404.html',
-                'index.html',
                 'manifest.webapp',
                 'content/css/loading.css'
             ]
