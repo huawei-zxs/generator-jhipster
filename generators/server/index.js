@@ -143,7 +143,7 @@ module.exports = class extends BaseBlueprintGenerator {
                 this.packageName = configuration.get('packageName');
                 this.serverPort = configuration.get('serverPort');
                 if (this.serverPort === undefined) {
-                    this.serverPort = '8080';
+                    this.serverPort = '8081';
                 }
                 this.websocket = configuration.get('websocket') === 'no' ? false : configuration.get('websocket');
                 if (this.websocket === undefined) {

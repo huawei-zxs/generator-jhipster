@@ -4,6 +4,7 @@ const helpers = require('yeoman-test');
 const getFilesForOptions = require('./utils/utils').getFilesForOptions;
 const expectedFiles = require('./utils/expected-files');
 const angularfiles = require('../generators/client/files-angular').files;
+const constants = require('../generators/generator-constants');
 
 describe('JHipster server generator', () => {
     describe('generate server with ehcache', () => {
@@ -30,6 +31,10 @@ describe('JHipster server generator', () => {
                     serverSideOptions: []
                 })
                 .on('end', done);
+        });
+
+        it('generates application-dev.yml with the default server port 8080', () => {
+            assert.fileContent(`${constants.SERVER_MAIN_RES_DIR}config/application-dev.yml`, /port: 8080/);
         });
 
         it('creates expected files for default configuration for server generator', () => {
