@@ -157,7 +157,7 @@ module.exports = class extends BaseBlueprintGenerator {
                     `${this.fetchFromInstalledJHipster(
                         'spring-controller/templates'
                     )}/${SERVER_MAIN_SRC_DIR}package/web/rest/Resource.java.ejs`,
-                    `${SERVER_MAIN_SRC_DIR}${this.packageFolder}/web/rest/${this.controllerClass}.java`
+                    `${SERVER_MAIN_SRC_DIR}${this.packageFolder}/rest/${this.controllerClass}.java`
                 );
                 this.template(
                     `${this.fetchFromInstalledJHipster(
