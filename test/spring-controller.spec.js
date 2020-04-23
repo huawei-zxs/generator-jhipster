@@ -48,3 +48,21 @@ describe('JHipster generator spring-controller', () => {
         });
     });
 });
+
+describe('spring-controller template paths', () => {
+    it('references only existing template directories in the generator source', () => {
+        const fs = require('fs');
+        const nodeAssert = require('assert');
+        const BaseGenerator = require('../generators/generator-base').prototype;
+
+        const source = fs.readFileSync(path.join(__dirname, '../generators/spring-controller/index.js'), 'utf-8');
+        const matches = source.match(/fetchFromInstalledJHipster\(\s*'([^']+)'\s*\)/g);
+        nodeAssert.ok(matches && matches.length > 0, 'expected at least one referenced template subpath');
+
+        matches.forEach(match => {
+            const subpath = match.match(/'([^']+)'/)[1];
+            const resolved = BaseGenerator.fetchFromInstalledJHipster(subpath);
+            nodeAssert.strictEqual(fs.existsSync(resolved), true, `referenced template path does not exist: ${resolved}`);
+        });
+    });
+});
