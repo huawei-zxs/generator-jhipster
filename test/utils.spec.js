@@ -57,6 +57,14 @@ describe('JHipster Utils', () => {
             assert.objectContent(infos, { packageName, angularAppName, clientRootFolder: `${clientRootFolder}-` });
         });
     });
+
+    describe('::buildEnumInfo', () => {
+        it('returns the enum instance name in the info object', () => {
+            const entity = { enumName: 'EntityName', fieldType: 'EntityName', fieldValues: 'field1, field2' };
+            const infos = utils.buildEnumInfo(entity, 'myApp', 'com.package', 'root');
+            assert.textEqual(infos.enumInstance, 'entityName');
+        });
+    });
     describe('::deepFind function', () => {
         const jsonData = {
             foo11: 'foo11value',

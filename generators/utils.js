@@ -466,7 +466,7 @@ function buildEnumInfo(field, angularAppName, packageName, clientRootFolder) {
     return {
         enumName: fieldType,
         enumValues: field.fieldValues.split(',').join(', '),
-        enumInstance: field.enumInstance,
+        enumInstace: field.enumInstance,
         enums,
         enumsWithCustomValue,
         angularAppName,
