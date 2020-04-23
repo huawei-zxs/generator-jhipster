@@ -39,7 +39,7 @@ const commonFiles = {
                     renameTo: () => '.gitignore'
                 },
                 {
-                    file: 'gitattributes',
+                    file: 'gitattributs',
                     renameTo: () => '.gitattributes',
                     method: 'copy'
                 },
