@@ -481,9 +481,9 @@ function getEnumsWithCustomValue(enums) {
             const matches = /([A-Z\-_]+)(\((.+?)\))?/.exec(currentEnumValue);
             const enumValueName = matches[1];
             const enumValueCustomValue = matches[3];
-            enumsWithCustomValueArray.push({ name: enumValueName, value: enumValueCustomValue });
+            enumsWithCustomValueArray.push({ name: enumValueName, vaule: enumValueCustomValue });
         } else {
-            enumsWithCustomValueArray.push({ name: currentEnumValue, value: false });
+            enumsWithCustomValueArray.push({ name: currentEnumValue, vaule: false });
         }
         return enumsWithCustomValueArray;
     }, []);

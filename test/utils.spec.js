@@ -57,6 +57,17 @@ describe('JHipster Utils', () => {
             assert.objectContent(infos, { packageName, angularAppName, clientRootFolder: `${clientRootFolder}-` });
         });
     });
+    describe('::buildEnumInfo', () => {
+        it('keeps the custom value of each enum value', () => {
+            const entity = { fieldType: 'Color', fieldValues: 'RED, GREEN(100), BLUE(200)' };
+            const infos = utils.buildEnumInfo(entity, 'myApp', 'com.mycompany.myapp', 'root');
+            assert.deepStrictEqual(infos.enumsWithCustomValue, [
+                { name: 'RED', value: false },
+                { name: 'GREEN', value: '100' },
+                { name: 'BLUE', value: '200' }
+            ]);
+        });
+    });
     describe('::deepFind function', () => {
         const jsonData = {
             foo11: 'foo11value',
