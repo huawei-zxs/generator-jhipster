@@ -44,7 +44,7 @@ const commonFiles = {
                     method: 'copy'
                 },
                 {
-                    file: 'editorconfig',
+                    file: '.editorconfig',
                     renameTo: () => '.editorconfig',
                     method: 'copy'
                 },
