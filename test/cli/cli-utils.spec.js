@@ -1,4 +1,5 @@
 const expect = require('chai').expect;
+const path = require('path');
 const cliUtil = require('../../cli/utils');
 const packageJson = require('../../package.json');
 
@@ -168,6 +169,21 @@ describe('jhipster cli utils test', () => {
                     foo: 'bar,who',
                     'from-cli': true
                 });
+            });
+        });
+    });
+
+    describe('loadBlueprintsFromYoRc', () => {
+        describe('when a .yo-rc.json file exists with blueprint configuration', () => {
+            const cwd = process.cwd();
+            before(() => {
+                process.chdir(path.join(__dirname, '../templates/ngx-blueprint'));
+            });
+            after(() => {
+                process.chdir(cwd);
+            });
+            it('returns the blueprints defined in the configuration', () => {
+                expect(cliUtil.loadBlueprintsFromYoRc()).to.eql([{ name: 'generator-jhipster-myblueprint', version: '0.2' }]);
             });
         });
     });
