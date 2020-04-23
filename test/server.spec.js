@@ -54,6 +54,11 @@ describe('JHipster server generator', () => {
                 )
             );
         });
+
+        it('generates default server port 8080 when serverPort is not set', () => {
+            assert.fileContent('src/main/resources/config/application-dev.yml', /server:\n  port: 8080/);
+            assert.fileContent('src/main/resources/config/application-prod.yml', /server:\n  port: 8080/);
+        });
     });
 
     describe('generate server with caffeine', () => {

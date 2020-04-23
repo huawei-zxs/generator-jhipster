@@ -327,7 +327,7 @@ function askForServerSideOpts(meta) {
         this.packageName = props.packageName;
         this.serverPort = props.serverPort;
         if (this.serverPort === undefined) {
-            this.serverPort = '8080';
+            this.serverPort = '9090';
         }
         this.cacheProvider = !reactive ? props.cacheProvider : 'no';
         this.enableHibernateCache = props.enableHibernateCache;
