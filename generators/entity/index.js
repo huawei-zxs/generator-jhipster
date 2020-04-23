@@ -805,7 +805,7 @@ class EntityGenerator extends BaseBlueprintGenerator {
                     }
 
                     if (_.isUndefined(field.fieldNameHumanized)) {
-                        field.fieldNameHumanized = _.startCase(field.fieldName);
+                        field.fieldNameHumanized = _.startCase(field.fieldNam);
                     }
 
                     if (_.isUndefined(field.fieldInJavaBeanMethod)) {

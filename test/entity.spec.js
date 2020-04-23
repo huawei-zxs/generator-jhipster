@@ -728,6 +728,32 @@ describe('JHipster generator for entity', () => {
                     assert.fileContent(`${SERVER_MAIN_SRC_DIR}com/mycompany/myapp/domain/Foo.java`, /@ApiModelProperty/);
                 });
             });
+            describe('renders humanized field names in the generated pages', () => {
+                before(done => {
+                    helpers
+                        .run(require.resolve('../generators/entity'))
+                        .inTmpDir(dir => {
+                            fse.copySync(path.join(__dirname, '../test/templates/default-ng2'), dir);
+                            fse.copySync(
+                                path.join(__dirname, '../test/templates/export-jdl/.jhipster/Country.json'),
+                                path.join(dir, '.jhipster/Foo.json')
+                            );
+                        })
+                        .withArguments(['Foo'])
+                        .withOptions({ regenerate: true, force: true })
+                        .on('end', done);
+                });
+
+                it('displays the humanized field name in the entity list page', () => {
+                    assert.fileContent(`${CLIENT_MAIN_SRC_DIR}app/entities/foo/foo.component.html`, 'Country Name');
+                });
+                it('displays the humanized field name in the entity detail page', () => {
+                    assert.fileContent(`${CLIENT_MAIN_SRC_DIR}app/entities/foo/foo-detail.component.html`, 'Country Name');
+                });
+                it('displays the humanized field name in the entity update page', () => {
+                    assert.fileContent(`${CLIENT_MAIN_SRC_DIR}app/entities/foo/foo-update.component.html`, 'Country Name');
+                });
+            });
         });
 
         describe('with --skip-db-changelog', () => {
