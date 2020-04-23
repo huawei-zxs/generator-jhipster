@@ -27,7 +27,7 @@ function writeFiles() {
             for (let i = 0; i < this.appConfigs.length; i++) {
                 const appName = this.appConfigs[i].baseName.toLowerCase();
                 this.app = this.appConfigs[i];
-                this.template('deployment.yml.ejs', `${appName}/${appName}-deployment.yml`);
+                this.template('deployments.yml.ejs', `${appName}/${appName}-deployment.yml`);
                 this.template('service.yml.ejs', `${appName}/${appName}-service.yml`);
                 // If we choose microservice with no DB, it is trying to move _no.yml as prodDatabaseType is getting tagged as 'string' type
                 if (this.app.prodDatabaseType !== 'no') {
