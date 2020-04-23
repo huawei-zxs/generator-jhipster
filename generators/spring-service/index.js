@@ -129,7 +129,7 @@ module.exports = class extends BaseBlueprintGenerator {
                 if (this.useInterface) {
                     this.template(
                         `${this.fetchFromInstalledJHipster(
-                            'spring-service/templates'
+                            'spring-service/template'
                         )}/${SERVER_MAIN_SRC_DIR}package/service/impl/ServiceImpl.java.ejs`,
                         `${SERVER_MAIN_SRC_DIR + this.packageFolder}/service/impl/${this.serviceClass}Impl.java`
                     );
