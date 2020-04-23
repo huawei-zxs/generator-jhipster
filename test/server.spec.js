@@ -54,6 +54,10 @@ describe('JHipster server generator', () => {
                 )
             );
         });
+
+        it('generates pom.xml with hibernate version matching the spring-boot BOM', () => {
+            assert.fileContent('pom.xml', /<hibernate\.version>5\.4\.12\.Final<\/hibernate\.version>/);
+        });
     });
 
     describe('generate server with caffeine', () => {
