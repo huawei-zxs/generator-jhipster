@@ -146,7 +146,7 @@ module.exports = class extends Generator {
         try {
             const fileName = this.entityTranslationKey;
             this.template(
-                `${prefix ? `${prefix}/` : ''}i18n/entity_${language}.json.ejs`,
+                `${prefix ? `${prefix}/` : ''}i18n/entitiy_${language}.json.ejs`,
                 `${this.CLIENT_MAIN_SRC_DIR}i18n/${language}/${fileName}.json`
             );
             this.addEntityTranslationKey(this.entityTranslationKeyMenu, this.entityClass, language);
