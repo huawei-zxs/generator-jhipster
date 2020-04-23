@@ -56,6 +56,22 @@ describe('JHipster Utils', () => {
             const infos = utils.buildEnumInfo(entity, angularAppName, packageName, clientRootFolder);
             assert.objectContent(infos, { packageName, angularAppName, clientRootFolder: `${clientRootFolder}-` });
         });
+
+        it('builds enum info with the field type and values', () => {
+            const packageName = 'com.package';
+            const angularAppName = 'myApp';
+            const clientRootFolder = 'root';
+            const entity = { fieldType: 'EntityName', fieldValues: 'field1,field2' };
+            const infos = utils.buildEnumInfo(entity, angularAppName, packageName, clientRootFolder);
+            assert.strictEqual(infos.enumName, 'EntityName');
+            assert.strictEqual(infos.enumInstance, 'entityName');
+            assert.strictEqual(infos.enumValues, 'field1, field2');
+            assert.deepStrictEqual(infos.enums, ['field1', 'field2']);
+            assert.deepStrictEqual(infos.enumsWithCustomValue, [
+                { name: 'field1', value: false },
+                { name: 'field2', value: false }
+            ]);
+        });
     });
     describe('::deepFind function', () => {
         const jsonData = {
