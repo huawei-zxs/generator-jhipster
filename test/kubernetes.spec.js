@@ -154,6 +154,9 @@ describe('JHipster Kubernetes Sub Generator', () => {
         it('creates expected mysql files', () => {
             assert.file(expectedFiles.msmysql);
         });
+        it('generates the mysql deployment with the pinned MySQL docker image version', () => {
+            assert.fileContent(expectedFiles.msmysql[1], /image: mysql:8\.0\.19/);
+        });
         it('creates expected jhipster-console files', () => {
             assert.file(expectedFiles.jhconsole);
         });
