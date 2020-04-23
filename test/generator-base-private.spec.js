@@ -52,6 +52,16 @@ export * from './entityFolderName/entityFileName.state';`;
                 expect(BaseGenerator.getDBTypeFromDBValue('mysql')).to.equal('sql');
             });
         });
+        describe('when called with postgresql', () => {
+            it('return SQL', () => {
+                expect(BaseGenerator.getDBTypeFromDBValue('postgresql')).to.equal('sql');
+            });
+        });
+        describe('when called with the non-canonical postgres value', () => {
+            it('return postgres', () => {
+                expect(BaseGenerator.getDBTypeFromDBValue('postgres')).to.equal('postgres');
+            });
+        });
         describe('when called with mongo DB', () => {
             it('return mongodb', () => {
                 expect(BaseGenerator.getDBTypeFromDBValue('mongodb')).to.equal('mongodb');

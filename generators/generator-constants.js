@@ -139,7 +139,7 @@ const SQL_DB_OPTIONS = [
         name: 'MariaDB'
     },
     {
-        value: 'postgresql',
+        value: 'postgres',
         name: 'PostgreSQL'
     },
     {
