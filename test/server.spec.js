@@ -105,4 +105,70 @@ describe('JHipster server generator', () => {
             );
         });
     });
+    describe('generate server with consistent dependency versions', () => {
+        describe('maven', () => {
+            before(done => {
+                helpers
+                    .run(path.join(__dirname, '../generators/server'))
+                    .withOptions({ skipInstall: true, skipChecks: true })
+                    .withPrompts({
+                        baseName: 'jhipster',
+                        packageName: 'com.mycompany.myapp',
+                        packageFolder: 'com/mycompany/myapp',
+                        serviceDiscoveryType: false,
+                        authenticationType: 'jwt',
+                        cacheProvider: 'ehcache',
+                        enableHibernateCache: true,
+                        databaseType: 'sql',
+                        devDatabaseType: 'h2Memory',
+                        prodDatabaseType: 'mysql',
+                        enableTranslation: true,
+                        nativeLanguage: 'en',
+                        languages: ['fr'],
+                        buildTool: 'maven',
+                        rememberMeKey: '5c37379956bd1242f5636c8cb322c2966ad81277',
+                        serverSideOptions: []
+                    })
+                    .on('end', done);
+            });
+
+            it('generates a pom.xml whose spring-boot version matches the jhipster-dependencies BOM', () => {
+                assert.fileContent('pom.xml', /<jhipster-dependencies\.version>3\.7\.0-SNAPSHOT<\/jhipster-dependencies\.version>/);
+                assert.fileContent('pom.xml', /<spring-boot\.version>2\.2\.6\.RELEASE<\/spring-boot\.version>/);
+            });
+        });
+
+        describe('gradle', () => {
+            before(done => {
+                helpers
+                    .run(path.join(__dirname, '../generators/server'))
+                    .withOptions({ skipInstall: true, skipChecks: true })
+                    .withPrompts({
+                        baseName: 'jhipster',
+                        packageName: 'com.mycompany.myapp',
+                        packageFolder: 'com/mycompany/myapp',
+                        serviceDiscoveryType: false,
+                        authenticationType: 'jwt',
+                        cacheProvider: 'ehcache',
+                        enableHibernateCache: true,
+                        databaseType: 'sql',
+                        devDatabaseType: 'h2Memory',
+                        prodDatabaseType: 'mysql',
+                        enableTranslation: true,
+                        nativeLanguage: 'en',
+                        languages: ['fr'],
+                        buildTool: 'gradle',
+                        rememberMeKey: '5c37379956bd1242f5636c8cb322c2966ad81277',
+                        serverSideOptions: []
+                    })
+                    .on('end', done);
+            });
+
+            it('generates a gradle.properties whose spring-boot version matches the jhipster-dependencies BOM', () => {
+                assert.fileContent('gradle.properties', /jhipster_dependencies_version=3\.7\.0-SNAPSHOT/);
+                assert.fileContent('gradle.properties', /spring_boot_version=2\.2\.6\.RELEASE/);
+            });
+        });
+    });
+
 });
