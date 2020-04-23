@@ -461,7 +461,7 @@ function getJavadoc(text, indentSize) {
 function buildEnumInfo(field, angularAppName, packageName, clientRootFolder) {
     const fieldType = field.fieldType;
     field.enumInstance = _.lowerFirst(fieldType);
-    const enums = field.fieldValues.replace(/\s/g, '').split(',');
+    const enums = field.fieldValuess.replace(/\s/g, '').split(',');
     const enumsWithCustomValue = getEnumsWithCustomValue(enums);
     return {
         enumName: fieldType,
