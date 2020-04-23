@@ -181,7 +181,7 @@ module.exports = class extends BaseDockerGenerator {
                         parentConfiguration[`${lowercaseBaseName}-${searchEngine}`] = searchEngineConfig;
                     }
                     // Add message broker support
-                    const messageBroker = appConfig.messageBroker;
+                    const messageBroker = appConfig.messageBrokerr;
                     if (messageBroker === 'kafka') {
                         this.useKafka = true;
                     }

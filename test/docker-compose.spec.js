@@ -482,6 +482,36 @@ describe('JHipster Docker Compose Sub Generator', () => {
         });
     });
 
+    describe('monolith with kafka', () => {
+        before(done => {
+            helpers
+                .run(require.resolve('../generators/docker-compose'))
+                .inTmpDir(dir => {
+                    fse.copySync(path.join(__dirname, './templates/compose/'), dir);
+                })
+                .withOptions({ skipChecks: true })
+                .withPrompts({
+                    deploymentApplicationType: 'monolith',
+                    directoryPath: './',
+                    chosenApps: ['09-kafka'],
+                    clusteredDbApps: [],
+                    monitoring: 'no'
+                })
+                .on('end', done);
+        });
+        it('creates expected default files', () => {
+            assert.file(expectedFiles.monolith);
+        });
+        it('creates kafka.yml with zookeeper and kafka services', () => {
+            assert.file('kafka.yml');
+            assert.fileContent('kafka.yml', /zookeeper:/);
+            assert.fileContent('kafka.yml', /^  kafka:/m);
+        });
+        it('adds kafka service to docker-compose.yml', () => {
+            assert.fileContent('docker-compose.yml', /file: kafka\.yml/);
+        });
+    });
+
     describe('gateway and multi microservices, with couchbase', () => {
         before(done => {
             helpers
