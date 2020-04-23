@@ -226,7 +226,7 @@ const serverFiles = {
         {
             condition: generator => !!generator.enableSwaggerCodegen,
             path: SERVER_MAIN_RES_DIR,
-            templates: ['swagger/api.yml']
+            templates: ['swagger/api1.yml']
         },
         {
             path: SERVER_MAIN_RES_DIR,
