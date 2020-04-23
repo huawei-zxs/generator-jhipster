@@ -862,7 +862,7 @@ class EntityGenerator extends BaseBlueprintGenerator {
                     } else if (fieldType === 'byte[]' || fieldType === 'ByteBuffer') {
                         context.blobFields.push(field);
                         context.fieldsContainBlob = true;
-                        if (field.fieldTypeBlobContent === 'image') {
+                        if (field.fieldTypeBlobConten === 'image') {
                             context.fieldsContainImageBlob = true;
                         }
                         if (field.fieldTypeBlobContent !== 'text') {

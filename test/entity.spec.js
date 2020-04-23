@@ -730,6 +730,45 @@ describe('JHipster generator for entity', () => {
             });
         });
 
+        context('with an image blob field', () => {
+            describe('regenerates angular image blob handling in the update component', () => {
+                before(done => {
+                    helpers
+                        .run(require.resolve('../generators/entity'))
+                        .inTmpDir(dir => {
+                            fse.copySync(path.join(__dirname, '../test/templates/default-ng2'), dir);
+                            fse.outputJsonSync(path.join(dir, '.jhipster/Foo.json'), {
+                                fluentMethods: true,
+                                relationships: [],
+                                fields: [
+                                    { fieldName: 'name', fieldType: 'String' },
+                                    { fieldName: 'image', fieldType: 'byte[]', fieldTypeBlobContent: 'image' }
+                                ],
+                                changelogDate: '20160926101210',
+                                entityTableName: 'foo',
+                                dto: 'no',
+                                pagination: 'no',
+                                service: 'no'
+                            });
+                        })
+                        .withArguments(['Foo'])
+                        .withOptions({ regenerate: true, force: true })
+                        .on('end', done);
+                });
+
+                it('generates ElementRef injection and the clearInputImage helper used by the update form template', () => {
+                    assert.fileContent(
+                        `${CLIENT_MAIN_SRC_DIR}app/entities/foo/foo-update.component.ts`,
+                        /clearInputImage\(field: string, fieldContentType: string, idInput: string\): void/
+                    );
+                    assert.fileContent(
+                        `${CLIENT_MAIN_SRC_DIR}app/entities/foo/foo-update.component.ts`,
+                        /import \{ Component, OnInit, ElementRef \} from '@angular\/core'/
+                    );
+                });
+            });
+        });
+
         describe('with --skip-db-changelog', () => {
             describe('SQL database', () => {
                 before(done => {
