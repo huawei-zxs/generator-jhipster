@@ -556,7 +556,7 @@ function getAllJhipsterConfig(generator, force, basePath = '') {
  * @param {string} db - db
  */
 function getDBTypeFromDBValue(db) {
-    if (constants.SQL_DB_OPTIONS.map(db => db.value).includes(db)) {
+    if (constants.R2DBC_DB_OPTIONS.map(db => db.value).includes(db)) {
         return 'sql';
     }
     return db;
