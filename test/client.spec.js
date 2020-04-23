@@ -1,4 +1,5 @@
 const path = require('path');
+const fs = require('fs');
 const assert = require('yeoman-assert');
 const helpers = require('yeoman-test');
 const getFilesForOptions = require('./utils/utils').getFilesForOptions;
@@ -39,6 +40,18 @@ describe('JHipster client generator', () => {
         });
         it('contains clientFramework with react value', () => {
             assert.fileContent('.yo-rc.json', /"clientFramework": "react"/);
+        });
+        it('generates a package.json with mutually compatible react-router-dom versions', () => {
+            const packageJson = JSON.parse(fs.readFileSync('package.json', 'utf8'));
+            const runtimeVersion = packageJson.dependencies['react-router-dom'];
+            const typesVersion = packageJson.devDependencies['@types/react-router-dom'];
+            assert.strictEqual(runtimeVersion, '5.1.2');
+            assert.strictEqual(typesVersion, '5.1.3');
+            assert.strictEqual(
+                runtimeVersion.split('.')[0],
+                typesVersion.split('.')[0],
+                `@types/react-router-dom (${typesVersion}) major version must match react-router-dom (${runtimeVersion})`
+            );
         });
     });
 
