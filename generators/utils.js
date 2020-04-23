@@ -53,7 +53,7 @@ module.exports = {
     rewriteJSONFile,
     copyWebResource,
     renderContent,
-    deepFind,
+    findDeep,
     getJavadoc,
     buildEnumInfo,
     copyObjectProps,
@@ -295,7 +295,7 @@ function replaceTranslationKeysWithText(body, generator, regex) {
         const key = match[1];
         const target = key;
         const jsonData = geti18nJson(key, generator);
-        const keyValue = jsonData !== undefined ? deepFind(jsonData, key) : undefined;
+        const keyValue = jsonData !== undefined ? findDeep(jsonData, key) : undefined;
 
         body = body.replace(target, keyValue !== undefined ? keyValue : generator.baseName);
     }
@@ -319,7 +319,7 @@ function replacePlaceholders(body, generator) {
         const key = match[2];
         const target = match[1];
         const jsonData = geti18nJson(key, generator);
-        const keyValue = jsonData !== undefined ? deepFind(jsonData, key, true) : undefined; // dirty fix to get placeholder as it is not in proper json format, name has a dot in it. Assuming that all placeholders are in similar format
+        const keyValue = jsonData !== undefined ? findDeep(jsonData, key, true) : undefined; // dirty fix to get placeholder as it is not in proper json format, name has a dot in it. Assuming that all placeholders are in similar format
 
         body = body.replace(target, keyValue !== undefined ? keyValue : '');
     }
@@ -343,9 +343,9 @@ function replaceTranslation(body, generator) {
             const target = match[1];
             const limit = match[4]; // string indicating validation limit (e.g. "{ max: 4 }")
             const jsonData = geti18nJson(key, generator);
-            let keyValue = jsonData !== undefined ? deepFind(jsonData, key) : undefined;
+            let keyValue = jsonData !== undefined ? findDeep(jsonData, key) : undefined;
             if (!keyValue) {
-                keyValue = deepFind(jsonData, key, true); // dirty fix to get placeholder as it is not in proper json format, name has a dot in it. Assuming that all placeholders are in similar format
+                keyValue = findDeep(jsonData, key, true); // dirty fix to get placeholder as it is not in proper json format, name has a dot in it. Assuming that all placeholders are in similar format
             }
             if (limit) {
                 // Replace "{{ placeholder }}" with numeric limit
@@ -411,7 +411,7 @@ function geti18nJson(key, generator) {
  * @param path path to traverse
  * @param placeholder placeholder
  */
-function deepFind(obj, path, placeholder) {
+function findDeep(obj, path, placeholder) {
     const paths = path.split('.');
     let current = obj;
     if (placeholder) {
