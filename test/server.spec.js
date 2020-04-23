@@ -54,6 +54,11 @@ describe('JHipster server generator', () => {
                 )
             );
         });
+
+        it('generates pom.xml with spring-boot version matching the jhipster-dependencies BOM', () => {
+            assert.fileContent('pom.xml', '<jhipster-dependencies.version>3.7.0-SNAPSHOT</jhipster-dependencies.version>');
+            assert.fileContent('pom.xml', '<spring-boot.version>2.2.6.RELEASE</spring-boot.version>');
+        });
     });
 
     describe('generate server with caffeine', () => {
