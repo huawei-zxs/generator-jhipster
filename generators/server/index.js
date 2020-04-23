@@ -86,7 +86,7 @@ module.exports = class extends BaseBlueprintGenerator {
                 this.SERVER_MAIN_SRC_DIR = constants.SERVER_MAIN_SRC_DIR;
                 this.SERVER_MAIN_RES_DIR = constants.SERVER_MAIN_RES_DIR;
                 this.SERVER_TEST_SRC_DIR = constants.SERVER_TEST_SRC_DIR;
-                this.SERVER_TEST_RES_DIR = constants.SERVER_TEST_RES_DIR;
+                this.SERVER_TEST_RES_DIR = constants.SERVER_TEST_RESOURCES_DIR;
 
                 this.DOCKER_JHIPSTER_REGISTRY = constants.DOCKER_JHIPSTER_REGISTRY;
                 this.DOCKER_JAVA_JRE = constants.DOCKER_JAVA_JRE;

@@ -6,7 +6,7 @@ const CLIENT_TEST_SRC_DIR = constants.CLIENT_TEST_SRC_DIR;
 const SERVER_MAIN_SRC_DIR = constants.SERVER_MAIN_SRC_DIR;
 const SERVER_MAIN_RES_DIR = constants.SERVER_MAIN_RES_DIR;
 const SERVER_TEST_SRC_DIR = constants.SERVER_TEST_SRC_DIR;
-const SERVER_TEST_RES_DIR = constants.SERVER_TEST_RES_DIR;
+const SERVER_TEST_RES_DIR = constants.SERVER_TEST_RESOURCES_DIR;
 const DOCKER_DIR = constants.DOCKER_DIR;
 
 const expectedFiles = {

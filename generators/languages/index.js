@@ -220,7 +220,7 @@ module.exports = class extends BaseBlueprintGenerator {
                         this.installI18nClientFilesByLanguage(this, constants.CLIENT_MAIN_SRC_DIR, language);
                     }
                     if (!this.skipServer) {
-                        this.installI18nServerFilesByLanguage(this, constants.SERVER_MAIN_RES_DIR, language, constants.SERVER_TEST_RES_DIR);
+                        this.installI18nServerFilesByLanguage(this, constants.SERVER_MAIN_RES_DIR, language, constants.SERVER_TEST_RESOURCES_DIR);
                     }
                     statistics.sendSubGenEvent('languages/language', language);
                 });

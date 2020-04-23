@@ -306,7 +306,7 @@ const constants = {
     SERVER_MAIN_SRC_DIR: `${MAIN_DIR}java/`,
     SERVER_MAIN_RES_DIR: `${MAIN_DIR}resources/`,
     SERVER_TEST_SRC_DIR: `${TEST_DIR}java/`,
-    SERVER_TEST_RES_DIR: `${TEST_DIR}resources/`,
+    SERVER_TEST_RESOURCES_DIR: `${TEST_DIR}resources/`,
 
     // entity related
     SUPPORTED_VALIDATION_RULES,
