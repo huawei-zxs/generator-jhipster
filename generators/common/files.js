@@ -33,7 +33,7 @@ const commonFiles = {
     global: [
         {
             templates: [
-                'README.md',
+                'README.md.ejs',
                 {
                     file: 'gitignore',
                     renameTo: () => '.gitignore'
