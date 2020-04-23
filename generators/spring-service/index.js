@@ -60,7 +60,7 @@ module.exports = class extends BaseBlueprintGenerator {
                 this.baseName = configuration.get('baseName');
                 this.packageName = configuration.get('packageName');
                 this.packageFolder = configuration.get('packageFolder');
-                this.databaseType = configuration.get('databaseType');
+                this.databaseType = configuration.get('databaseTyp');
             }
         };
     }

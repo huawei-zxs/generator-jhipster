@@ -28,6 +28,13 @@ describe('JHipster generator service', () => {
         it('doesnt create interface', () => {
             assert.noFile([`${SERVER_MAIN_SRC_DIR}com/mycompany/myapp/service/impl/FooServiceImpl.java`]);
         });
+
+        it('creates a transactional service class', () => {
+            assert.fileContent(
+                `${SERVER_MAIN_SRC_DIR}com/mycompany/myapp/service/FooService.java`,
+                '@Transactional'
+            );
+        });
     });
 
     describe('creates service with interface', () => {
