@@ -64,7 +64,7 @@ module.exports = class extends BaseGenerator {
      * Look for every blueprint config and move them to 'generator-jhipster' namespace.
      */
     async _migrateAllBlueprints() {
-        if (!this.isJhipsterVersionLessThan('6.6.1')) {
+        if (!this.isJhipsterVersionLessThan('6.6.0')) {
             const msg = `Skipping config upgrade, config generated with jhipster version: ${this.jhipsterOldVersion}`;
             if (this._debug && this._debug.enabled) {
                 this._debug(msg);
