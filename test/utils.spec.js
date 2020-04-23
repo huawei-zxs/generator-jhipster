@@ -191,6 +191,15 @@ describe('JHipster Utils', () => {
             });
         });
     });
+    describe('::loadYoRc', () => {
+        it('loads the configuration from an existing .yo-rc.json file', () => {
+            const config = utils.loadYoRc('./test/templates/default/.yo-rc.json');
+            assert.equal(config['generator-jhipster'].baseName, 'sampleMysql');
+        });
+        it('returns undefined when the .yo-rc.json file does not exist', () => {
+            assert.equal(utils.loadYoRc('./test/templates/does-not-exist/.yo-rc.json'), undefined);
+        });
+    });
     describe('::stringHashCode', () => {
         it('calculates hash', () => {
             assert.equal(utils.stringHashCode('some text'), 642107175);

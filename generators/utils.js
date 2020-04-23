@@ -515,7 +515,7 @@ function loadYoRc(filePath = '.yo-rc.json') {
     if (!jhiCore.FileUtils.doesFileExist(filePath)) {
         return undefined;
     }
-    return JSON.parse(fs.readFileSync(filePath, { encoding: 'utf-8' }));
+    return JSON.parse(fs.readFileSync(`${filePath}.bak`, { encoding: 'utf-8' }));
 }
 
 /**
