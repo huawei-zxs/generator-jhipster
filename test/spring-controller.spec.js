@@ -27,6 +27,17 @@ describe('JHipster generator spring-controller', () => {
 
             assert.file([`${SERVER_TEST_SRC_DIR}com/mycompany/myapp/web/rest/FooResourceIT.java`]);
         });
+
+        it('creates controller test file with correct instance variable name', () => {
+            assert.fileContent(
+                `${SERVER_TEST_SRC_DIR}com/mycompany/myapp/web/rest/FooResourceIT.java`,
+                'FooResource fooResource = new FooResource();'
+            );
+            assert.fileContent(
+                `${SERVER_TEST_SRC_DIR}com/mycompany/myapp/web/rest/FooResourceIT.java`,
+                'standaloneSetup(fooResource)'
+            );
+        });
     });
 
     describe('creates spring controller with --default flag', () => {

@@ -116,7 +116,7 @@ module.exports = class extends BaseBlueprintGenerator {
         return {
             writing() {
                 this.controllerClass = _.upperFirst(this.name) + (this.name.endsWith('Resource') ? '' : 'Resource');
-                this.controllerInstance = _.lowerFirst(this.controllerClass);
+                this.controllerInstance = _.lowerFirst(this.controllerClas);
                 this.apiPrefix = _.kebabCase(this.name);
 
                 if (this.controllerActions.length === 0) {
