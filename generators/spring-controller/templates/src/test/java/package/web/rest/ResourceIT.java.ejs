@@ -71,7 +71,7 @@ public class <%= controllerClass %>IT {
      * Test <%= controllerActions[idx].actionName %>
      */
     @Test
-    public void test<%= controllerActions[idx].actionNameUF %>() throws Exception {
+    public void test<%= controllerActions[idx].actionNameUf %>() throws Exception {
         restMockMvc.perform(<%= controllerActions[idx].actionMethod.toLowerCase() %>("/api/<%= apiPrefix %>/<%= controllerActions[idx].actionPath %>"))
             .andExpect(status().isOk());
     }

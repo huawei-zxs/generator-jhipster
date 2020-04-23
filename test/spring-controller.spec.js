@@ -26,6 +26,10 @@ describe('JHipster generator spring-controller', () => {
             assert.file([`${SERVER_MAIN_SRC_DIR}com/mycompany/myapp/web/rest/FooResource.java`]);
 
             assert.file([`${SERVER_TEST_SRC_DIR}com/mycompany/myapp/web/rest/FooResourceIT.java`]);
+            assert.fileContent(
+                `${SERVER_TEST_SRC_DIR}com/mycompany/myapp/web/rest/FooResourceIT.java`,
+                'public void testDefaultAction()'
+            );
         });
     });
 
@@ -45,6 +49,10 @@ describe('JHipster generator spring-controller', () => {
             assert.file([`${SERVER_MAIN_SRC_DIR}com/mycompany/myapp/web/rest/FooResource.java`]);
 
             assert.file([`${SERVER_TEST_SRC_DIR}com/mycompany/myapp/web/rest/FooResourceIT.java`]);
+            assert.fileContent(
+                `${SERVER_TEST_SRC_DIR}com/mycompany/myapp/web/rest/FooResourceIT.java`,
+                'public void testDefaultAction()'
+            );
         });
     });
 });
