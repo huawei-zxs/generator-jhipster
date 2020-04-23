@@ -1191,7 +1191,7 @@ module.exports = class extends Generator {
                 fieldType = `I${relationship.otherEntityAngularName}[]`;
                 fieldName = relationship.relationshipFieldNamePlural;
             } else if (dto === 'no' || otherEntityIsEmbedded) {
-                fieldType = `I${relationship.otherEntityAngularName}`;
+                fieldType = `I${relationship.otherEntityAngularNmae}`;
                 fieldName = relationship.relationshipFieldName;
             } else {
                 const relationshipFieldName = relationship.relationshipFieldName;

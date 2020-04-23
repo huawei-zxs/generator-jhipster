@@ -132,6 +132,64 @@ export * from './entityFolderName/entityFileName.state';`;
         });
     });
 
+    describe('generateEntityClientFields', () => {
+        describe('when called with dto option no', () => {
+            it('should use the relationship angular name as typescript type', () => {
+                const fields = [{ fieldName: 'name', fieldType: 'String' }];
+                const relationships = [
+                    {
+                        relationshipType: 'many-to-one',
+                        otherEntityAngularName: 'Region',
+                        relationshipFieldName: 'region'
+                    }
+                ];
+                const out = BaseGenerator.generateEntityClientFields('Long', fields, relationships, 'no');
+                expect(out).to.include('region?: IRegion');
+            });
+            it('should generate plural field for one-to-many relationships', () => {
+                const fields = [];
+                const relationships = [
+                    {
+                        relationshipType: 'one-to-many',
+                        otherEntityAngularName: 'Region',
+                        relationshipFieldNamePlural: 'regions'
+                    }
+                ];
+                const out = BaseGenerator.generateEntityClientFields('Long', fields, relationships, 'no');
+                expect(out).to.include('regions?: IRegion[]');
+            });
+            it('should use the relationship angular name as typescript type for embedded entities', () => {
+                const fields = [];
+                const relationships = [
+                    {
+                        relationshipType: 'many-to-one',
+                        otherEntityAngularName: 'Region',
+                        relationshipFieldName: 'region',
+                        otherEntityIsEmbedded: true
+                    }
+                ];
+                const out = BaseGenerator.generateEntityClientFields('Long', fields, relationships, 'mapstruct');
+                expect(out).to.include('region?: IRegion');
+            });
+        });
+        describe('when called with dto option mapstruct', () => {
+            it('should generate id field for many-to-one relationships', () => {
+                const fields = [];
+                const relationships = [
+                    {
+                        relationshipType: 'many-to-one',
+                        otherEntityAngularName: 'Region',
+                        relationshipFieldName: 'region',
+                        otherEntityFieldCapitalized: 'Id',
+                        ownerSide: true
+                    }
+                ];
+                const out = BaseGenerator.generateEntityClientFields('Long', fields, relationships, 'mapstruct');
+                expect(out).to.include('regionId?: number');
+            });
+        });
+    });
+
     describe('generateLanguageOptions', () => {
         describe('when called with empty array', () => {
             it('return empty', () => {
