@@ -6,6 +6,7 @@ const expectedFiles = require('./utils/expected-files');
 const angularFiles = require('../generators/client/files-angular').files;
 const reactFiles = require('../generators/client/files-react').files;
 const constants = require('../generators/generator-constants');
+const semver = require('semver');
 
 const ANGULAR = constants.SUPPORTED_CLIENT_FRAMEWORKS.ANGULAR;
 const REACT = constants.SUPPORTED_CLIENT_FRAMEWORKS.REACT;
@@ -77,6 +78,14 @@ describe('JHipster client generator', () => {
         });
         it('contains clientPackageManager with npm value', () => {
             assert.fileContent('.yo-rc.json', /"clientPackageManager": "npm"/);
+        });
+        it('generates a package.json with a TypeScript version supported by Angular 9 compiler-cli', () => {
+            const generatedPackageJson = JSON.parse(require('fs').readFileSync('package.json', 'utf8'));
+            const typescriptVersion = generatedPackageJson.devDependencies.typescript;
+            assert.ok(
+                semver.satisfies(typescriptVersion, '>=3.6.4 <3.8.0'),
+                `typescript ${typescriptVersion} is outside the range supported by @angular/compiler-cli 9.0.4 (>=3.6.4 <3.8.0)`
+            );
         });
     });
 
