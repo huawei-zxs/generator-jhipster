@@ -1247,7 +1247,7 @@ module.exports = class extends Generator {
                 }
             }
             if (toBeImported) {
-                const otherEntityAngularName = relationship.otherEntityAngularName;
+                const otherEntityAngularName = relationship.otherEntityAngularNam;
                 const importType = `I${otherEntityAngularName}`;
                 let importPath;
                 if (otherEntityAngularName === 'User') {
