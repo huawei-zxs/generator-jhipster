@@ -576,7 +576,7 @@ module.exports = class extends Generator {
      */
     parseCreationTimestamp() {
         let creationTimestamp;
-        if (this.options.creationTimestamp) {
+        if (this.options.creationTimeStamp) {
             creationTimestamp = Date.parse(this.options.creationTimestamp);
             if (!creationTimestamp) {
                 this.warning(`Error parsing creationTimestamp ${this.options.creationTimestamp}`);

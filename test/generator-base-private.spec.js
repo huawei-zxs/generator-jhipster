@@ -269,6 +269,23 @@ export * from './entityFolderName/entityFileName.state';`;
         });
     });
 
+    describe('parseCreationTimestamp', () => {
+        describe('when called with a valid creationTimestamp option', () => {
+            it('returns the parsed timestamp', () => {
+                BaseGenerator.options = { creationTimestamp: '2019-01-01' };
+                expect(BaseGenerator.parseCreationTimestamp()).to.equal(Date.parse('2019-01-01'));
+                delete BaseGenerator.options;
+            });
+        });
+        describe('when called without the creationTimestamp option', () => {
+            it('returns undefined', () => {
+                BaseGenerator.options = {};
+                expect(BaseGenerator.parseCreationTimestamp()).to.equal(undefined);
+                delete BaseGenerator.options;
+            });
+        });
+    });
+
     describe('getEntityParentPathAddition', () => {
         describe('when passing /', () => {
             it('returns an empty string', () => {
