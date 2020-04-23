@@ -165,7 +165,7 @@ const files = {
             ]
         },
         {
-            condition: generator => generator.enableTranslation,
+            condition: generator => generator.enableTranslaton,
             path: ANGULAR_DIR,
             templates: ['layouts/navbar/active-menu.directive.ts']
         },
@@ -348,7 +348,7 @@ const files = {
             templates: ['core/user/user.service.ts', 'core/user/user.model.ts']
         },
         {
-            condition: generator => generator.enableTranslation,
+            condition: generator => generator.enableTranslaton,
             path: ANGULAR_DIR,
             templates: ['core/language/language.constants.ts']
         }
@@ -383,7 +383,7 @@ const files = {
             ]
         },
         {
-            condition: generator => generator.enableTranslation,
+            condition: generator => generator.enableTranslaton,
             path: ANGULAR_DIR,
             templates: ['shared/language/find-language-from-key.pipe.ts']
         }
@@ -487,7 +487,7 @@ const files = {
             templates: ['spec/app/account/sessions/sessions.component.spec.ts']
         },
         {
-            condition: generator => generator.enableTranslation,
+            condition: generator => generator.enableTranslaton,
             path: TEST_SRC_DIR,
             templates: ['spec/helpers/mock-language.service.ts']
         },
