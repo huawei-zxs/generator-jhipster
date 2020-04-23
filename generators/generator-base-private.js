@@ -925,7 +925,7 @@ module.exports = class extends Generator {
         const blueprintPeerJhipsterVersion =
             blueprintPackageJson.peerDependencies && blueprintPackageJson.peerDependencies['generator-jhipster'];
         if (blueprintPeerJhipsterVersion) {
-            if (semver.satisfies(mainGeneratorJhipsterVersion, blueprintPeerJhipsterVersion)) {
+            if (!semver.satisfies(mainGeneratorJhipsterVersion, blueprintPeerJhipsterVersion)) {
                 return;
             }
             this.error(

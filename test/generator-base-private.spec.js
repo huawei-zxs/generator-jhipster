@@ -1,5 +1,7 @@
 const path = require('path');
 const expect = require('chai').expect;
+const sinon = require('sinon');
+const packagejs = require('../package.json');
 // using base generator which extends the private base
 const BaseGenerator = require('../generators/generator-base').prototype;
 const constants = require('../generators/generator-constants');
@@ -318,6 +320,67 @@ export * from './entityFolderName/entityFileName.state';`;
         describe('when passing ../../foo', () => {
             it('throw an error', () => {
                 expect(() => BaseGenerator.getEntityParentPathAddition('../../foo')).to.throw();
+            });
+        });
+    });
+
+    describe('checkJHipsterBlueprintVersion', () => {
+        let sandbox;
+
+        beforeEach(() => {
+            sandbox = sinon.createSandbox();
+            sandbox.stub(BaseGenerator, 'findBlueprintPackageJson');
+            sandbox.stub(BaseGenerator, 'warning');
+            sandbox.stub(BaseGenerator, 'error').callsFake(message => {
+                throw new Error(message);
+            });
+        });
+
+        afterEach(() => {
+            sandbox.restore();
+        });
+
+        describe('when blueprint declares a compatible peer dependency range', () => {
+            it('does not report a version conflict', () => {
+                BaseGenerator.findBlueprintPackageJson.returns({
+                    peerDependencies: { 'generator-jhipster': `^${packagejs.version}` }
+                });
+                expect(() => BaseGenerator.checkJHipsterBlueprintVersion('generator-jhipster-foo')).to.not.throw();
+            });
+        });
+
+        describe('when blueprint declares an incompatible peer dependency range', () => {
+            it('reports a version conflict', () => {
+                BaseGenerator.findBlueprintPackageJson.returns({
+                    peerDependencies: { 'generator-jhipster': '^0.0.1' }
+                });
+                expect(() => BaseGenerator.checkJHipsterBlueprintVersion('generator-jhipster-foo')).to.throw(/not compatible/);
+            });
+        });
+
+        describe('when blueprint declares an exact matching dependency', () => {
+            it('does not report a version conflict', () => {
+                BaseGenerator.findBlueprintPackageJson.returns({
+                    dependencies: { 'generator-jhipster': packagejs.version }
+                });
+                expect(() => BaseGenerator.checkJHipsterBlueprintVersion('generator-jhipster-foo')).to.not.throw();
+            });
+        });
+
+        describe('when blueprint declares a conflicting dependency', () => {
+            it('reports a version conflict', () => {
+                BaseGenerator.findBlueprintPackageJson.returns({
+                    dependencies: { 'generator-jhipster': '6.0.0' }
+                });
+                expect(() => BaseGenerator.checkJHipsterBlueprintVersion('generator-jhipster-foo')).to.throw(/not compatible/);
+            });
+        });
+
+        describe('when blueprint package.json cannot be found', () => {
+            it('warns and returns without error', () => {
+                BaseGenerator.findBlueprintPackageJson.returns(undefined);
+                expect(() => BaseGenerator.checkJHipsterBlueprintVersion('generator-jhipster-foo')).to.not.throw();
+                sinon.assert.calledOnce(BaseGenerator.warning);
             });
         });
     });
