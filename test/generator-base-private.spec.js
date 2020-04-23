@@ -52,6 +52,11 @@ export * from './entityFolderName/entityFileName.state';`;
                 expect(BaseGenerator.getDBTypeFromDBValue('mysql')).to.equal('sql');
             });
         });
+        describe('when called with mariadb', () => {
+            it('return sql', () => {
+                expect(BaseGenerator.getDBTypeFromDBValue('mariadb')).to.equal('sql');
+            });
+        });
         describe('when called with mongo DB', () => {
             it('return mongodb', () => {
                 expect(BaseGenerator.getDBTypeFromDBValue('mongodb')).to.equal('mongodb');
