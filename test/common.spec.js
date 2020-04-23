@@ -5,7 +5,7 @@ const fse = require('fs-extra');
 const expectedFiles = require('./utils/expected-files');
 
 describe('JHipster generator common', () => {
-    before(done => {
+    it('creates common files', () =>
         helpers
             .run(require.resolve('../generators/common'))
             .inTmpDir(dir => {
@@ -16,10 +16,7 @@ describe('JHipster generator common', () => {
                 skipInstall: true,
                 skipChecks: true
             })
-            .on('end', done);
-    });
-
-    it('creates common files', () => {
-        assert.file(expectedFiles.common);
-    });
+            .then(() => {
+                assert.file(expectedFiles.common);
+            }));
 });
