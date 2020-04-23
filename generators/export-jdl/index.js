@@ -24,7 +24,7 @@ const statistics = require('../statistics');
 module.exports = class extends BaseGenerator {
     constructor(args, opts) {
         super(args, opts);
-        this.baseName = this.config.get('baseName');
+        this.baseName = this.config.get('basename');
         this.argument('jdlFile', { type: String, required: false, defaults: `${this.baseName}.jdl` });
         // This adds support for a `--from-cli` flag
         this.option('from-cli', {
