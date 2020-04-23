@@ -1361,7 +1361,8 @@ module.exports = class extends PrivateBase {
             // if old version is unknown then can't compare and return false
             return false;
         }
-        return semver.lt(this.jhipsterOldVersion, version);
+        const oldVersion = semver.minVersion(this.jhipsterOldVersion);
+        return semver.lt(oldVersion, version);
     }
 
     /**
