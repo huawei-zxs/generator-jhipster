@@ -850,5 +850,29 @@ describe('JHipster generator for entity', () => {
                 });
             });
         });
+
+        context('with enum field', () => {
+            describe('regenerates an entity with an enum field', () => {
+                before(done => {
+                    helpers
+                        .run(require.resolve('../generators/entity'))
+                        .inTmpDir(dir => {
+                            fse.copySync(path.join(__dirname, '../test/templates/enum-field'), dir);
+                        })
+                        .withArguments(['Foo'])
+                        .withOptions({ regenerate: true, force: true })
+                        .on('end', done);
+                });
+
+                it('creates the enum java file with the expected package', () => {
+                    assert.file(`${SERVER_MAIN_SRC_DIR}com/mycompany/myapp/domain/enumeration/Genre.java`);
+                    assert.fileContent(
+                        `${SERVER_MAIN_SRC_DIR}com/mycompany/myapp/domain/enumeration/Genre.java`,
+                        'package com.mycompany.myapp.domain.enumeration;'
+                    );
+                    assert.fileContent(`${SERVER_MAIN_SRC_DIR}com/mycompany/myapp/domain/enumeration/Genre.java`, 'public enum Genre');
+                });
+            });
+        });
     });
 });

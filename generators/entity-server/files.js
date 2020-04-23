@@ -393,7 +393,7 @@ function writeFiles() {
                         this.template(
                             `${this.fetchFromInstalledJHipster(
                                 'entity-server/templates'
-                            )}/${SERVER_MAIN_SRC_DIR}package/domain/enumeration/Enum.java.ejs`,
+                            )}/${SERVER_MAIN_SRC_DIR}package/domain/enumerations/Enum.java.ejs`,
                             `${SERVER_MAIN_SRC_DIR}${this.packageFolder}/domain/enumeration/${fieldType}.java`,
                             this,
                             {},

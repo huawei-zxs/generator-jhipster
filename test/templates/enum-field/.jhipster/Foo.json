@@ -1,0 +1,21 @@
+{
+    "fluentMethods": true,
+    "relationships": [],
+    "fields": [
+        {
+            "fieldName": "name",
+            "fieldType": "String"
+        },
+        {
+            "fieldName": "genre",
+            "fieldType": "Genre",
+            "fieldValues": "ACTION, COMEDY, THRILLER",
+            "fieldIsEnum": true
+        }
+    ],
+    "changelogDate": "20160926101210",
+    "entityTableName": "foo",
+    "dto": "no",
+    "pagination": "no",
+    "service": "no"
+}
