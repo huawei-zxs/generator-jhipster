@@ -132,6 +132,51 @@ export * from './entityFolderName/entityFileName.state';`;
         });
     });
 
+    describe('generateEntityClientFields', () => {
+        describe('with a many-to-one relationship and dto', () => {
+            it('generates the relationship foreign key field with the proper casing', () => {
+                const fields = BaseGenerator.generateEntityClientFields(
+                    'Long',
+                    [],
+                    [
+                        {
+                            relationshipType: 'many-to-one',
+                            relationshipFieldName: 'foo',
+                            relationshipFieldNamePlural: 'foos',
+                            otherEntityAngularName: 'Foo',
+                            otherEntityFieldCapitalized: 'Name',
+                            ownerSide: true,
+                            otherEntityIsEmbedded: false
+                        }
+                    ],
+                    'mapstruct'
+                );
+                expect(fields).to.include('fooId?: number');
+            });
+        });
+        describe('with an owning side one-to-one relationship and dto', () => {
+            it('generates the relationship foreign key field with the proper casing', () => {
+                const fields = BaseGenerator.generateEntityClientFields(
+                    'Long',
+                    [],
+                    [
+                        {
+                            relationshipType: 'one-to-one',
+                            relationshipFieldName: 'bar',
+                            relationshipFieldNamePlural: 'bars',
+                            otherEntityAngularName: 'Bar',
+                            otherEntityFieldCapitalized: 'Name',
+                            ownerSide: true,
+                            otherEntityIsEmbedded: false
+                        }
+                    ],
+                    'mapstruct'
+                );
+                expect(fields).to.include('barId?: number');
+            });
+        });
+    });
+
     describe('generateLanguageOptions', () => {
         describe('when called with empty array', () => {
             it('return empty', () => {

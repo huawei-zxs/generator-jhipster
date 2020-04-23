@@ -1210,7 +1210,7 @@ module.exports = class extends Generator {
                         variablesWithTypes.push(`${fieldName}?: ${fieldType}`);
                     }
                     fieldType = tsKeyType; // review: added for mongodb-with-relations
-                    fieldName = `${relationshipFieldName}Id`;
+                    fieldName = `${relationshipFieldName}ID`;
                 } else {
                     fieldType = tsKeyType;
                     fieldName = `${relationship.relationshipFieldName}Id`;
