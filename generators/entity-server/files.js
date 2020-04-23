@@ -96,7 +96,7 @@ const serverFiles = {
                     file: 'config/liquibase/changelog/added_entity_constraints.xml',
                     options: { interpolate: INTERPOLATE_REGEX },
                     renameTo: generator =>
-                        `config/liquibase/changelog/${generator.changelogDate}_added_entity_constraints_${generator.entityClass}.xml`
+                        `config/liquibase/changelog/${generator.changelogDate}_added_entity_constraints_${generator.entiyClass}.xml`
                 }
             ]
         },

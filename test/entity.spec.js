@@ -819,6 +819,33 @@ describe('JHipster generator for entity', () => {
             });
         });
 
+        context('with many-to-one relationship (constraints changelog)', () => {
+            describe('generates the constraints changelog file', () => {
+                before(done => {
+                    helpers
+                        .run(require.resolve('../generators/entity'))
+                        .inTmpDir(dir => {
+                            fse.copySync(path.join(__dirname, '../test/templates/default-microservice'), dir);
+                            fse.copySync(
+                                path.join(__dirname, '../test/templates/export-jdl/.jhipster/Employee.json'),
+                                path.join(dir, '.jhipster/Foo.json')
+                            );
+                        })
+                        .withArguments(['Foo'])
+                        .withOptions({ regenerate: true, force: true })
+                        .on('end', done);
+                });
+
+                it('creates the constraints changelog with the entity name', () => {
+                    assert.file(`${SERVER_MAIN_RES_DIR}config/liquibase/changelog/20160926083805_added_entity_constraints_Foo.xml`);
+                    assert.fileContent(
+                        `${SERVER_MAIN_RES_DIR}config/liquibase/changelog/20160926083805_added_entity_constraints_Foo.xml`,
+                        /addForeignKeyConstraint/
+                    );
+                });
+            });
+        });
+
         context('reproducible build', () => {
             describe('no dto, no service, no pagination', () => {
                 before(done => {
