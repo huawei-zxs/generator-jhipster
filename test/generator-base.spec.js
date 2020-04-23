@@ -34,6 +34,18 @@ describe('Generator Base', () => {
             });
         });
     });
+    describe('getLocaleId', () => {
+        describe('when called with the Chinese (Simplified) language key', () => {
+            it('returns the Simplified Chinese locale id', () => {
+                expect(BaseGenerator.getLocaleId('zh-cn')).to.equal('zh-Hans');
+            });
+        });
+        describe('when called with the Chinese (Traditional) language key', () => {
+            it('returns the Traditional Chinese locale id', () => {
+                expect(BaseGenerator.getLocaleId('zh-tw')).to.equal('zh-Hant');
+            });
+        });
+    });
     describe('getTableName', () => {
         describe('when called with a value', () => {
             it('returns a table name', () => {

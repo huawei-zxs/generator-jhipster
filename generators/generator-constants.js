@@ -194,7 +194,7 @@ const LANGUAGES = [
         name: 'Chinese (Simplified)',
         dispName: '中文（简体）',
         value: 'zh-cn',
-        localeId: 'zh-Hans'
+        localeId: 'zh-Hant'
     },
     {
         name: 'Chinese (Traditional)',
