@@ -78,6 +78,9 @@ describe('JHipster client generator', () => {
         it('contains clientPackageManager with npm value', () => {
             assert.fileContent('.yo-rc.json', /"clientPackageManager": "npm"/);
         });
+        it('references the existing favicon file in the webpack copy config', () => {
+            assert.fileContent('webpack/webpack.common.js', /from: '\.\/src\/main\/webapp\/favicon\.ico'/);
+        });
     });
 
     describe('generate client with Angular using yarn flag', () => {
