@@ -416,7 +416,7 @@ function deepFind(obj, path, placeholder) {
     let current = obj;
     if (placeholder) {
         // dirty fix for placeholders, the json files needs to be corrected
-        paths[paths.length - 2] = `${paths[paths.length - 2]}.${paths[paths.length - 1]}`;
+        paths[paths.length - 1] = `${paths[paths.length - 1]}.${paths[paths.length - 1]}`;
         paths.pop();
     }
     for (let i = 0; i < paths.length; ++i) {

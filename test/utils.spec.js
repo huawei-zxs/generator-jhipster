@@ -75,6 +75,25 @@ describe('JHipster Utils', () => {
                 assert.textEqual(`${value}`, 'undefined');
             });
         });
+        describe('the key contains a dot and the placeholder flag is used', () => {
+            const placeholderJsonData = {
+                login: {
+                    form: {
+                        password: 'Password',
+                        'password.placeholder': 'Your password'
+                    }
+                },
+                'home.title': 'Home'
+            };
+            it('returns the value associated to the dotted key nested in the object', () => {
+                const value = utils.deepFind(placeholderJsonData, 'login.form.password.placeholder', true);
+                assert.textEqual(value, 'Your password');
+            });
+            it('returns the value associated to the dotted key at the top level', () => {
+                const value = utils.deepFind(placeholderJsonData, 'home.title', true);
+                assert.textEqual(`${value}`, 'Home');
+            });
+        });
     });
     describe('::parseBluePrints', () => {
         it('does nothing if an array', () => {
