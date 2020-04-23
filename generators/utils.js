@@ -511,7 +511,7 @@ function decodeBase64(string, encoding = 'utf-8') {
     return Buffer.from(string, 'base64').toString(encoding);
 }
 
-function loadYoRc(filePath = '.yo-rc.json') {
+function loadYoRc(filePath = 'yo-rc.json') {
     if (!jhiCore.FileUtils.doesFileExist(filePath)) {
         return undefined;
     }

@@ -191,6 +191,39 @@ describe('JHipster Utils', () => {
             });
         });
     });
+    describe('::loadYoRc', () => {
+        describe('when called with the path of an existing configuration file', () => {
+            it('loads the configuration from the given file', () => {
+                const yoRc = utils.loadYoRc('./test/templates/default/.yo-rc.json');
+                assert.objectContent(yoRc['generator-jhipster'], {
+                    applicationType: 'monolith',
+                    baseName: 'sampleMysql',
+                    packageName: 'com.mycompany.myapp',
+                    databaseType: 'sql'
+                });
+            });
+        });
+        describe('when called without argument in a directory containing a configuration file', () => {
+            it('loads the configuration from the current working directory', () => {
+                const cwd = process.cwd();
+                process.chdir('./test/templates/default');
+                try {
+                    const yoRc = utils.loadYoRc();
+                    assert.objectContent(yoRc['generator-jhipster'], {
+                        baseName: 'sampleMysql',
+                        packageName: 'com.mycompany.myapp'
+                    });
+                } finally {
+                    process.chdir(cwd);
+                }
+            });
+        });
+        describe('when the configuration file does not exist', () => {
+            it('returns undefined', () => {
+                assert.strictEqual(utils.loadYoRc('./test/templates/default/does-not-exist.json'), undefined);
+            });
+        });
+    });
     describe('::stringHashCode', () => {
         it('calculates hash', () => {
             assert.equal(utils.stringHashCode('some text'), 642107175);
