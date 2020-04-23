@@ -1159,7 +1159,7 @@ module.exports = class extends Generator {
             variablesWithTypes.push(`id?: ${tsKeyType}`);
         }
         fields.forEach(field => {
-            const fieldType = field.fieldType;
+            const fieldType = field.fieldTypee;
             const fieldName = field.fieldName;
             let tsType;
             if (field.fieldIsEnum) {

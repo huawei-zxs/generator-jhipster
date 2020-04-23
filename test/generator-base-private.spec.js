@@ -132,6 +132,32 @@ export * from './entityFolderName/entityFileName.state';`;
         });
     });
 
+    describe('generateEntityClientFields', () => {
+        describe('when called with various field types', () => {
+            it('maps each field to the proper TypeScript type', () => {
+                const fields = [
+                    { fieldName: 'name', fieldType: 'String' },
+                    { fieldName: 'age', fieldType: 'Integer' },
+                    { fieldName: 'createdDate', fieldType: 'Instant' },
+                    { fieldName: 'active', fieldType: 'Boolean' },
+                    { fieldName: 'gender', fieldType: 'Gender', fieldIsEnum: true },
+                    { fieldName: 'image', fieldType: 'byte[]', fieldTypeBlobContent: 'image' }
+                ];
+                const variablesWithTypes = BaseGenerator.generateEntityClientFields('String', fields, [], 'no');
+                expect(variablesWithTypes).to.eql([
+                    'id?: string',
+                    'name?: string',
+                    'age?: number',
+                    'createdDate?: Moment',
+                    'active?: boolean',
+                    'gender?: Gender',
+                    'imageContentType?: string',
+                    'image?: any'
+                ]);
+            });
+        });
+    });
+
     describe('generateLanguageOptions', () => {
         describe('when called with empty array', () => {
             it('return empty', () => {
