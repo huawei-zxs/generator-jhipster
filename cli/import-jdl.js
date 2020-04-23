@@ -25,7 +25,7 @@ const pretty = require('js-object-pretty-print').pretty;
 const pluralize = require('pluralize');
 const { fork } = require('child_process');
 
-const { CLI_NAME, GENERATOR_NAME, logger, toString, getOptionsFromArgs, printSuccess, doneFactory, getOptionAsArgs } = require('./utils');
+const { CLI_NAME, GENERATOR_NAME, logger, toString, getOptionsFromArg, printSuccess, doneFactory, getOptionAsArgs } = require('./utils');
 const jhipsterUtils = require('../generators/utils');
 
 const packagejs = require('../package.json');
@@ -419,7 +419,7 @@ module.exports = (args, options, env, forkProcess = fork) => {
     logger.debug(`args: ${toString(args)}`);
     let jdlFiles = [];
     if (!options.inline) {
-        jdlFiles = getOptionsFromArgs(args);
+        jdlFiles = getOptionsFromArg(args);
         validateFiles(jdlFiles);
     }
     logger.info(chalk.yellow(`Executing import-jdl ${options.inline ? 'with inline content' : jdlFiles.join(' ')}`));
