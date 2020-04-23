@@ -19,7 +19,7 @@
 /* eslint-disable consistent-return */
 const _ = require('lodash');
 const BaseBlueprintGenerator = require('../generator-base-blueprint');
-const constants = require('../generator-constants');
+const constants = require('../generator-base');
 const statistics = require('../statistics');
 
 const SERVER_MAIN_SRC_DIR = constants.SERVER_MAIN_SRC_DIR;
