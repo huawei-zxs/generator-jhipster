@@ -54,6 +54,10 @@ describe('JHipster server generator', () => {
                 )
             );
         });
+
+        it('creates mysql.yml with the pinned MySQL 8.0.19 docker image', () => {
+            assert.fileContent('src/main/docker/mysql.yml', /image: mysql:8\.0\.19/);
+        });
     });
 
     describe('generate server with caffeine', () => {
